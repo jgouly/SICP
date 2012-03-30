@@ -20,7 +20,14 @@ struct Pascal<Same, Same> {
   constexpr static unsigned Value = 1;
 };
 
+constexpr int pascal(int row, int column)
+{
+	return (1 == row || 1 == column || row == column) ? 1 :
+		pascal(row - 1, column - 1) + pascal(row - 1, column);
+}
+
 int main()
 {
-  return Pascal<4, 3>::Value;
+  //return Pascal<4, 3>::Value;
+	return pascal(4, 3);
 }
