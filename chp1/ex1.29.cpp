@@ -9,20 +9,20 @@ struct inner_simpson {
 
 template<int N>
 struct inner_simpson<true, N> {
-double operator () (std::function<double(double)> f, double a, double b)
-{
-	const double h = (b - a) / N;
-	double sum = f(a);
-
-	for(int k = 1; k < N; ++k)
+	double operator () (std::function<double(double)> f, double a, double b)
 	{
-		double x = a + h * k;
-		sum += f(x) * (k % 2 == 0 ? 2 : 4);
-	}
+		const double h = (b - a) / N;
+		double sum = f(a);
 
-	sum += f(b);
-	return sum * h / 3;
-}
+		for(int k = 1; k < N; ++k)
+		{
+			double x = a + h * k;
+			sum += f(x) * (k % 2 == 0 ? 2 : 4);
+		}
+
+		sum += f(b);
+		return sum * h / 3;
+	}
 };
 
 template<int N>
