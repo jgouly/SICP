@@ -3,7 +3,6 @@
 
 double continued_fraction(std::function<double(double)> n,
 	std::function<double(double)> d, int k, int level = 1) {
-	std::cout << level << " " << d(level) << std::endl;
 	if(k == level) return n(k) / d(k);
 	return n(level) / (d(level) + continued_fraction(n, d, k, level + 1));
 }
