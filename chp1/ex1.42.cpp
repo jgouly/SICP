@@ -27,6 +27,14 @@ struct inner_repeat<1, T> {
 	}
 };
 
+template<typename T>
+struct inner_repeat<0, T> {
+	std::function<T(T)> get(std::function<T(T)> f)
+	{
+		return [](T t) { return t; };
+	}
+};
+
 template<typename T, int N>
 std::function<T(T)> repeat(std::function<T(T)> f)
 {
