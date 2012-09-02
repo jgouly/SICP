@@ -15,7 +15,7 @@ template<int N, typename T>
 struct inner_repeat {
 	std::function<T(T)> get(std::function<T(T)> f)
 	{
-		return inner_repeat<N - 1, T>().get(compose<T> { f, f });
+		return compose<T> {inner_repeat<N - 1, T>().get(f), f };
 	}
 };
 
@@ -45,7 +45,7 @@ int main() {
 	compose<int> squinc { square, inc };
 	std::cout << squinc(6) << std::endl;
 
-	auto repeated = repeat<int, 2>(square);
+	auto repeated = repeat<int, 3>(inc);
 	std::cout << repeated(5) << std::endl;
 	return 0;
 }
